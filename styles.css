@@ -1,0 +1,135 @@
+/* Reset dasar dan set tampilan full screen */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+  background-color: #ccc;
+}
+
+/* Container buku dengan perspektif untuk efek 3D */
+.book {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  perspective: 2000px;
+  background-color: #ccc;
+}
+
+/* Setiap halaman diatur agar memenuhi layar, diberi padding untuk teks, dan disembunyikan secara default */
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  padding: 40px;
+  display: none;
+  overflow-y: auto;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+/* Kelas "visible" menampilkan halaman yang seharusnya terlihat */
+.page.visible {
+  display: block;
+}
+/* Konten halaman */
+.page .content {
+  width: 100%;
+  height: 100%;
+}
+/* Styling paragraf agar nyaman dibaca */
+.page p {
+  margin-bottom: 20px;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* Elemen flipper untuk animasi pergantian halaman */
+.flipper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  padding: 40px;
+  overflow-y: auto;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: none;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Animasi flip forward advanced dengan lengkungan seperti gelombang */
+@keyframes flipForwardAdvanced {
+  0% {
+    transform: perspective(2000px) rotateY(0deg) scale(1) skewX(0deg);
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+    filter: blur(0);
+  }
+  20% {
+    transform: perspective(2000px) rotateY(-30deg) scale(0.98) skewX(5deg);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+    filter: blur(0.5px);
+  }
+  40% {
+    transform: perspective(2000px) rotateY(-60deg) scale(0.95) skewX(10deg);
+    box-shadow: -10px 0 20px rgba(0,0,0,0.4);
+    filter: blur(1px);
+  }
+  60% {
+    transform: perspective(2000px) rotateY(-120deg) scale(0.95) skewX(5deg);
+    box-shadow: -15px 0 25px rgba(0,0,0,0.4);
+    filter: blur(0.8px);
+  }
+  80% {
+    transform: perspective(2000px) rotateY(-150deg) scale(0.98) skewX(2deg);
+    box-shadow: -10px 0 20px rgba(0,0,0,0.3);
+    filter: blur(0.3px);
+  }
+  100% {
+    transform: perspective(2000px) rotateY(-180deg) scale(1) skewX(0deg);
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+    filter: blur(0);
+  }
+}
+
+/* Animasi flip backward advanced (kebalikan dari flip forward) */
+@keyframes flipBackwardAdvanced {
+  0% {
+    transform: perspective(2000px) rotateY(180deg) scale(1) skewX(0deg);
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+    filter: blur(0);
+  }
+  20% {
+    transform: perspective(2000px) rotateY(150deg) scale(0.98) skewX(-5deg);
+    box-shadow: 5px 0 15px rgba(0,0,0,0.3);
+    filter: blur(0.5px);
+  }
+  40% {
+    transform: perspective(2000px) rotateY(120deg) scale(0.95) skewX(-10deg);
+    box-shadow: 10px 0 20px rgba(0,0,0,0.4);
+    filter: blur(1px);
+  }
+  60% {
+    transform: perspective(2000px) rotateY(60deg) scale(0.95) skewX(-5deg);
+    box-shadow: 15px 0 25px rgba(0,0,0,0.4);
+    filter: blur(0.8px);
+  }
+  80% {
+    transform: perspective(2000px) rotateY(30deg) scale(0.98) skewX(-2deg);
+    box-shadow: 10px 0 20px rgba(0,0,0,0.3);
+    filter: blur(0.3px);
+  }
+  100% {
+    transform: perspective(2000px) rotateY(0deg) scale(1) skewX(0deg);
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+    filter: blur(0);
+  }
+}
